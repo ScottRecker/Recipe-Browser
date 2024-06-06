@@ -11,7 +11,7 @@ import SwiftUI
 struct Recipe_BrowserApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
