@@ -13,7 +13,7 @@ struct RootView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(mealPreviews.meals, id: \.id) { mealPreview in
+                ForEach(mealPreviews.sortedMeals, id: \.id) { mealPreview in
                     RecipeRowView(mealPreview: mealPreview)
                         .listRowSeparator(.hidden)
                 }

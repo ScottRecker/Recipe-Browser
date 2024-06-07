@@ -10,6 +10,12 @@ import Foundation
 struct MealList: Codable {
     let meals: [MealPreview]
 
+    var sortedMeals: [MealPreview] {
+        return meals.sorted(by: { lhs, rhs in
+            return lhs.mealTitle < rhs.mealTitle
+        })
+    }
+
     static let placeholder = MealList(meals: [
         MealPreview(mealTitle: "Blackwell Tart", mealThumb: "https://www.themealdb.com/images/media/meals/wyrqqq1468233628.jpg", idMeal: "52767"),
         MealPreview(mealTitle: "Apple Frangipane Tart", mealThumb: "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg", idMeal: "52768"),
