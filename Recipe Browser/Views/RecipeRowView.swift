@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RecipeRowView: View {
+    let mealPreview: MealPreview
     var body: some View {
         VStack {
             Image(.bannanPancakes)
@@ -26,7 +27,7 @@ struct RecipeRowView: View {
                         .stroke(Color(.systemGray5))
                 )
                 .padding(5)
-            Text("Banna Pancakes")
+            Text(mealPreview.mealTitle)
                 .bold()
                 .padding(.leading, 20)
                 .padding(.bottom, 8)
@@ -45,5 +46,5 @@ fileprivate extension CGFloat {
 }
 
 #Preview {
-    RecipeRowView()
+    RecipeRowView(mealPreview: .placeHolder)
 }

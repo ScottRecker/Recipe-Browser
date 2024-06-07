@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct RootView: View {
+    @State var mealPreviews: MealList = .placeholder
+
     var body: some View {
-        List {
-            ForEach(0..<12) { _ in
-                RecipeRowView()
-                    .listRowSeparator(.hidden)
+        NavigationStack {
+            List {
+                ForEach(mealPreviews.meals, id: \.id) { mealPreview in
+                    RecipeRowView(mealPreview: mealPreview)
+                        .listRowSeparator(.hidden)
+                }
+                .listStyle(.plain)
+                .navigationTitle("Recipes")
+                .onAppear() {
+                    print("Fetching meal list...")
+                }
             }
         }
-        .listStyle(.plain)
-        .navigationTitle("Recipies")
     }
 }
 
 #Preview {
-    NavigationStack {
-        RootView()
-    }
+    RootView()
 }
