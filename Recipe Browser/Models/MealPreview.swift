@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Response: Codable {
-    let meals: [MealStub]
+struct MealList: Codable {
+    let meals: [MealPreview]
 }
 
-struct MealStub: Codable, Equatable {
-    let meal: String
+struct MealPreview: Codable, Equatable {
+    let mealTitle: String
     let mealThumb: String
-    let id: String
+    let idMeal: String
 
     private enum CodingKeys: String, CodingKey {
-        case meal = "strMeal"
+        case mealTitle = "strMeal"
         case mealThumb = "strMealThumb"
-        case id = "idMeal"
+        case idMeal
     }
 }
