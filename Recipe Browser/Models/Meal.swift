@@ -71,8 +71,10 @@ struct Meal: Decodable {
 
         var tempIngredients = [(String, String)]()
         for i in 1...20 {
-            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")!
-            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")!
+            let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")
+            let measureKey = CodingKeys(stringValue: "strMeasure\(i)")
+            guard let ingredientKey, let measureKey else { fatalError("Failed to create coding key") }
+
             let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey) ?? ""
             let measure = try container.decodeIfPresent(String.self, forKey: measureKey) ?? ""
             if !ingredient.isEmpty && !measure.isEmpty {
