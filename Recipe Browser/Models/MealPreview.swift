@@ -41,4 +41,8 @@ struct MealPreview: Codable, Equatable {
     )
 }
 
+extension MealPreview: Identifiable {
+    var id: String {
+        idMeal
+    }
 }
