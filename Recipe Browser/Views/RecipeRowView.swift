@@ -11,21 +11,32 @@ struct RecipeRowView: View {
     let mealPreview: MealPreview
     var body: some View {
         VStack {
-            Image(.bannanPancakes)
-                .resizable()
-                .scaledToFill()
-                .frame(maxHeight: .imageHeight)
-                .clipShape(
-                    RoundedRectangle(cornerRadius: .cornerRadius)
-                )
-                .background(
-                    RoundedRectangle(cornerRadius: .cornerRadius)
-                        .fill(Color(.systemGray5))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: .cornerRadius)
-                        .stroke(Color(.systemGray5))
-                )
+            AsyncImage(url: mealPreview.mealThumbUrl) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxHeight: .imageHeight)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: .cornerRadius)
+                        )
+                        .background(
+                            RoundedRectangle(cornerRadius: .cornerRadius)
+                                .fill(Color(.systemGray5))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: .cornerRadius)
+                                .stroke(Color(.systemGray5))
+                        )
+                } else if phase.error != nil {
+                    // Display a placeholder when loading failed
+                    Image(systemName: "questionmark.diamond")
+                        .imageScale(.large)
+                } else {
+                    // Display a placeholder while loading
+                    ProgressView()
+                }
+            }
                 .padding(5)
             Text(mealPreview.mealTitle)
                 .bold()

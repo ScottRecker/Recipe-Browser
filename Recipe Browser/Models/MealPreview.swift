@@ -28,6 +28,10 @@ struct MealPreview: Codable, Equatable {
     let mealThumb: String
     let idMeal: String
 
+    var mealThumbUrl: URL? {
+        URL(string: mealThumb)
+    }
+
     private enum CodingKeys: String, CodingKey {
         case mealTitle = "strMeal"
         case mealThumb = "strMealThumb"
