@@ -16,7 +16,7 @@ struct SegmentedControlView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Picker("", selection: $group) {
                 ForEach(Group.allCases) { item in
                     Text(item.rawValue.capitalized)
@@ -31,6 +31,7 @@ struct SegmentedControlView: View {
                 ingredientsView()
             case .instructions:
                 instructionsView()
+                    .padding(.top, 4)
             }
         }
     }
@@ -43,9 +44,18 @@ struct SegmentedControlView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(item.1)
                 }
+                .listRowBackground(Color(.systemGray6))
+                .listRowInsets(.init(top: 0,
+                                     leading: 10,
+                                     bottom: 0,
+                                     trailing: 10))
+
             }
         }
+        .contentMargins(.vertical, 4)
+        .contentMargins(.horizontal, 4)
         .scrollContentBackground(.hidden)
+
     }
 
     private func instructionsView() -> some View {
@@ -53,6 +63,7 @@ struct SegmentedControlView: View {
             Text(meal.instructions)
                 .padding()
                 .lineSpacing(12.0)
+                .background(Color(.systemGray6))
         }
     }
 
