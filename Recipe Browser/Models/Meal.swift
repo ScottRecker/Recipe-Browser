@@ -25,7 +25,7 @@ struct Meal: Decodable {
     let imageSource: String?
     let creativeCommonsConfirmed: Bool?
     let dateModified: Date?
-    let ingredients: [(String, String)]
+    let ingredients: [(ingredient: String, measurement: String)]
 
     enum CodingKeys: String, CodingKey {
         case idMeal
@@ -83,4 +83,60 @@ struct Meal: Decodable {
         }
         ingredients = tempIngredients
     }
+
+}
+
+extension Meal {
+    internal init(
+        idMeal: String,
+        meal: String,
+        drinkAlternate: String? = nil,
+        category: String,
+        area: String,
+        instructions: String,
+        mealThumb: String,
+        tags: String? = nil,
+        youtubeUrl: String? = nil,
+        sourceUrl: String? = nil,
+        imageSource: String? = nil,
+        creativeCommonsConfirmed: Bool? = nil,
+        dateModified: Date? = nil,
+        ingredients: [(
+            String,
+            String
+        )]
+    ) {
+        self.idMeal = idMeal
+        self.meal = meal
+        self.drinkAlternate = drinkAlternate
+        self.category = category
+        self.area = area
+        self.instructions = instructions
+        self.mealThumb = mealThumb
+        self.tags = tags
+        self.youtubeUrl = youtubeUrl
+        self.sourceUrl = sourceUrl
+        self.imageSource = imageSource
+        self.creativeCommonsConfirmed = creativeCommonsConfirmed
+        self.dateModified = dateModified
+        self.ingredients = ingredients
+    }
+
+    static let placeholder = Meal(
+        idMeal: "52855",
+        meal: "Banana Pancakes",
+        category: "Dessert",
+        area: "American",
+        instructions: "In a bowl, mash the banana with a fork until it resembles a thick purée. Stir in the eggs, baking powder and vanilla.\r\nHeat a large non-stick frying pan or pancake pan over a medium heat and brush with half the oil. Using half the batter, spoon two pancakes into the pan, cook for 1-2 mins each side, then tip onto a plate. Repeat the process with the remaining oil and batter. Top the pancakes with the pecans and raspberries.",
+        mealThumb: "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg",
+        ingredients: [
+            ("Banana", "1 large"),
+            ("Eggs", "2 medium"),
+            ("Baking Powder", "pinch"),
+            ("Vanilla Extract", "spinkling"),
+            ("Oil", "1 tsp"),
+            ("Pecan Nuts", "25g"),
+            ("Raspberries", "125g")
+        ]
+    )
 }
