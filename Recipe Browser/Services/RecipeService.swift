@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum NetworkError: Error {
-    case malformedUrl(_ description: String)
+    case malformedUrl
     case decodingError(_ description: String)
     case invalidResponse(_ description: String)
     case unsupportedImage
@@ -19,8 +19,8 @@ enum NetworkError: Error {
 extension NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .malformedUrl(let description):
-            return description
+        case .malformedUrl:
+            return "Unable to create URL"
         case .decodingError(let description):
             return description
         case .invalidResponse(let description):
@@ -38,7 +38,7 @@ struct RecipeService {
     private static let mealURL = URL(string: "https://themealdb.com/api/json/v1/1/lookup.php")
 
     static func getMealPreviews() async throws -> [MealPreview] {
-        guard let dessertListURL else { throw NetworkError.malformedUrl("Unable to create Url") }
+        guard let dessertListURL else { throw NetworkError.malformedUrl }
         do {
             let data = try await fetchData(url: dessertListURL)
             let mealList = try JSONDecoder().decode(MealsResponse.self, from: data)
@@ -49,7 +49,7 @@ struct RecipeService {
     }
     
     static func getMealDetails(mealId: String) async throws -> Meal {
-        guard var mealURL else { throw NetworkError.malformedUrl("Unable to create Url") }
+        guard var mealURL else { throw NetworkError.malformedUrl }
         let queryItem = URLQueryItem(name: "i", value: mealId)
         mealURL.append(queryItems: [queryItem])
         do {
