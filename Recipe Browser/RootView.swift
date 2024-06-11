@@ -24,6 +24,13 @@ struct RootView: View {
                 .listStyle(.plain)
                 .navigationTitle("Recipes")
             }
+            .alert(isPresented: $viewModel.errorState.showError) {
+                Alert(
+                    title: Text("Uh Oh 😕"),
+                    message: Text(viewModel.errorState.errorMessage),
+                    dismissButton: .default(Text("Ok"))
+                )
+            }
             .task {
                await viewModel.fetchDessertPreviews()
             }

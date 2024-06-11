@@ -45,6 +45,13 @@ struct RecipeDetailView: View {
         .padding()
         .navigationTitle(viewModel.meal?.meal ?? "")
         .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $viewModel.errorState.showError) {
+            Alert(
+                title: Text("Uh Oh 😕"),
+                message: Text(viewModel.errorState.errorMessage),
+                dismissButton: .default(Text("Ok"))
+            )
+        }
         .task {
             await viewModel.fetchDessertDetails(mealId: meal.idMeal)
         }
