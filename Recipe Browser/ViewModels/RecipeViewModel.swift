@@ -12,7 +12,12 @@ import SwiftUI
 class RecipeViewModel {
     private var meals = [MealPreview]()
     var errorState: (showError: Bool, errorMessage: String) = (false, "Uh-oh")
+    private let imageLoader = ImageLoader()
 
+    var uiImage: UIImage? {
+        imageLoader.uiImage
+    }
+    
     var sortedMeals: [MealPreview] {
         return meals.sorted(by: { lhs, rhs in
             return lhs.mealTitle < rhs.mealTitle
@@ -38,6 +43,10 @@ class RecipeViewModel {
             errorState.errorMessage = error.localizedDescription
             errorState.showError = true
         }
+    }
+
+    func fetchImage(url: String) async throws {
+        try await imageLoader.fetchImage(url: url)
     }
 
 }

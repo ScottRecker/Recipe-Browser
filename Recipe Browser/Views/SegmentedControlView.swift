@@ -39,6 +39,7 @@ struct SegmentedControlView: View {
     private func ingredientsView() -> some View {
         List {
             if let ingredients = meal?.ingredients {
+                // TODO: remove duplicates, API data contains duplicate ingredients
                 ForEach(ingredients, id: \.ingredient) { item in
                     HStack {
                         Text(item.0)

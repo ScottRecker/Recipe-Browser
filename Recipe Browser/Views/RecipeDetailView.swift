@@ -13,28 +13,17 @@ struct RecipeDetailView: View {
 
     var body: some View {
         VStack {
-            if let url = meal.mealThumbUrl {
-            AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image
+            if let uiImage = viewModel.uiImage {
+                Image(uiImage: uiImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(maxHeight: 200.0)
                             .clipShape(
                                 RoundedRectangle(cornerRadius: 10.0)
                             )
-                    case .failure:
-                        Image(systemName: "photo")
-                        Text(phase.error?.localizedDescription ?? "Failed to load image")
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
             } else {
                 ProgressView()
+                    .padding(.vertical, 30)
             }
 
             VStack {
