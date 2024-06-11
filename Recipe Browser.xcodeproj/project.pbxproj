@@ -15,6 +15,7 @@
 		D21043522C124FE400139FE6 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21043512C124FE400139FE6 /* Meal.swift */; };
 		D210435A2C1257E400139FE6 /* MealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21043592C1257E400139FE6 /* MealTests.swift */; };
 		D21043612C1266EC00139FE6 /* RecipeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21043602C1266EC00139FE6 /* RecipeRowView.swift */; };
+		D21B193B2C18B84700C5CDCD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21B193A2C18B84700C5CDCD /* ImageLoader.swift */; };
 		D2CEDFFF2C1378FC006685E2 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEDFFE2C1378FC006685E2 /* RecipeDetailView.swift */; };
 		D2CEE0012C13A8D2006685E2 /* SegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEE0002C13A8D2006685E2 /* SegmentedControlView.swift */; };
 		D2CEE0032C16275B006685E2 /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CEE0022C16275B006685E2 /* RecipeViewModel.swift */; };
@@ -43,6 +44,7 @@
 		D21043572C1257E400139FE6 /* Recipe BrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe BrowserTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21043592C1257E400139FE6 /* MealTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTests.swift; sourceTree = "<group>"; };
 		D21043602C1266EC00139FE6 /* RecipeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRowView.swift; sourceTree = "<group>"; };
+		D21B193A2C18B84700C5CDCD /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		D2CEDFFE2C1378FC006685E2 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		D2CEE0002C13A8D2006685E2 /* SegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlView.swift; sourceTree = "<group>"; };
 		D2CEE0022C16275B006685E2 /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D2CEE0062C1641D9006685E2 /* RecipeService.swift */,
+				D21B193A2C18B84700C5CDCD /* ImageLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				D21043522C124FE400139FE6 /* Meal.swift in Sources */,
 				D21043432C12467100139FE6 /* RootView.swift in Sources */,
 				D2CEE0072C1641D9006685E2 /* RecipeService.swift in Sources */,
+				D21B193B2C18B84700C5CDCD /* ImageLoader.swift in Sources */,
 				D21043502C124ECC00139FE6 /* MealPreview.swift in Sources */,
 				D2CEE0032C16275B006685E2 /* RecipeViewModel.swift in Sources */,
 				D21043412C12467100139FE6 /* Recipe_BrowserApp.swift in Sources */,
