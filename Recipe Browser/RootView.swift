@@ -34,6 +34,9 @@ struct RootView: View {
             .task {
                await viewModel.fetchDessertPreviews()
             }
+            .refreshable {
+                await viewModel.refreshDessertPreviews()
+            }
         }
     }
 }
