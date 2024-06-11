@@ -12,7 +12,7 @@ final class MealTests: XCTestCase {
 
     func testMealStub() throws {
         let decoder = JSONDecoder()
-        let response = try! decoder.decode(MealList.self, from: mealListData)
+        let response = try! decoder.decode(MealsResponse.self, from: mealListData)
         XCTAssertEqual(response.meals.count, 3)
         XCTAssertEqual(response.meals[0].idMeal, "53049")
     }
