@@ -29,15 +29,13 @@ struct RecipeRowView: View {
                                 .stroke(Color(.systemGray5))
                         )
                 } else if phase.error != nil {
-                    // Display a placeholder when loading failed
                     Image(systemName: "questionmark.diamond")
                         .imageScale(.large)
                 } else {
-                    // Display a placeholder while loading
                     ProgressView()
                 }
             }
-                .padding(5)
+            .padding(5)
             Text(mealPreview.mealTitle)
                 .bold()
                 .padding(.leading, 20)
