@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct RootView: View {
-    @State var mealPreviews: MealList = .placeholder
+    @State var viewModel = RecipeViewModel()
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(mealPreviews.sortedMeals, id: \.id) { mealPreview in
-                    RecipeRowView(mealPreview: mealPreview)
-                        .listRowSeparator(.hidden)
+            ScrollView {
+                ForEach(viewModel.sortedMeals, id: \.id) { mealPreview in
+                    NavigationLink {
+                        RecipeDetailView(meal: mealPreview)
+                    } label: {
+                        RecipeRowView(mealPreview: mealPreview)
+                            .listRowSeparator(.hidden)
+                    }
                 }
                 .listStyle(.plain)
                 .navigationTitle("Recipes")
-                .onAppear() {
-                    print("Fetching meal list...")
-                }
+            }
+            .task {
+               await viewModel.fetchDessertPreviews()
             }
         }
     }
