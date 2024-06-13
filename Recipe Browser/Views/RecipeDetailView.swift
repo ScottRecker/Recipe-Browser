@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
-    @State var meal: MealPreview
+    let meal: MealPreview
     @State private var viewModel = RecipeDetailViewModel()
 
     var body: some View {
