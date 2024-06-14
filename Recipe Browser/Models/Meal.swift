@@ -27,29 +27,30 @@ struct Meal: Decodable {
     let dateModified: Date?
     let ingredients: [(ingredient: String, measurement: String)]
 
-    enum CodingKeys: String, CodingKey {
-        case idMeal
-        case meal = "strMeal"
-        case drinkAlternate = "strDrinkAlternate"
-        case category = "strCategory"
-        case area = "strArea"
-        case instructions = "strInstructions"
-        case mealThumb = "strMealThumb"
-        case tags = "strTags"
-        case youtubeUrl = "strYoutube"
-        case sourceUrl = "strSource"
-        case imageSource = "strImageSource"
-        case creativeCommonsConfirmed = "strCreativeCommonsConfirmed"
-        case dateModified = "dateModified"
+    struct CodingKeys: CodingKey, Hashable {
+        var stringValue: String
 
-        case strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5
-        case strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10
-        case strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15
-        case strIngredient16, strIngredient17, strIngredient18, strIngredient19, strIngredient20
-        case strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5
-        case strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10
-        case strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15
-        case strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20
+        static let idMeal = CodingKeys(stringValue: "idMeal")
+        static let meal = CodingKeys(stringValue: "strMeal")
+        static let drinkAlternate = CodingKeys(stringValue: "strDrinkAlternate")
+        static let category = CodingKeys(stringValue: "strCategory")
+        static let area = CodingKeys(stringValue: "strArea")
+        static let instructions = CodingKeys(stringValue: "strInstructions")
+        static let mealThumb = CodingKeys(stringValue: "strMealThumb")
+        static let tags = CodingKeys(stringValue: "strTags")
+        static let youtubeUrl = CodingKeys(stringValue: "strYoutube")
+        static let sourceUrl = CodingKeys(stringValue: "strSource")
+        static let imageSource = CodingKeys(stringValue: "strImageSource")
+        static let creativeCommonsConfirmed = CodingKeys(stringValue: "strCreativeCommonsConfirmed")
+        static let dateModified = CodingKeys(stringValue: "dateModified")
+
+        init(stringValue: String) {
+            self.stringValue = stringValue
+        }
+
+        // Unused, only for int-backed Codables.
+        var intValue: Int? { return nil }
+        init?(intValue: Int) { return nil }
     }
 
     init(from decoder: Decoder) throws {
@@ -70,20 +71,24 @@ struct Meal: Decodable {
         dateModified = try? container.decodeIfPresent(Date.self, forKey: .dateModified)
 
         var tempIngredients = [(String, String)]()
-        for i in 1...20 {
+
+        let dynamicKeys = container.allKeys.filter { $0.stringValue.hasPrefix("strIngredient") }
+        guard dynamicKeys.count > 0 else {
+            ingredients = tempIngredients
+            return
+        }
+        for i in 1...dynamicKeys.count {
             let ingredientKey = CodingKeys(stringValue: "strIngredient\(i)")
             let measureKey = CodingKeys(stringValue: "strMeasure\(i)")
-            guard let ingredientKey, let measureKey else { fatalError("Failed to create coding key") }
-
             let ingredient = try container.decodeIfPresent(String.self, forKey: ingredientKey) ?? ""
             let measure = try container.decodeIfPresent(String.self, forKey: measureKey) ?? ""
             if !ingredient.isEmpty && !measure.isEmpty {
                 tempIngredients.append((ingredient, measure))
             }
         }
+
         ingredients = tempIngredients
     }
-
 }
 
 extension Meal {
